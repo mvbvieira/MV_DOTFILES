@@ -26,6 +26,9 @@ echo "${NORMAL}"
     printf "${BLUE}%s${NORMAL}\n" "Symlinking $VIM/.vimrc with ~/.vimrc..."
     ln -fs $PWD/.vimrc ~/.vimrc
 
+    printf "${BLUE}%s${NORMAL}\n" "Symlinking $TMUX/.tmux.config with ~/.tmux.config..."
+    ln -fs $PWD/.vimrc ~/.vimrc
+
     if [ ! -d "$VIM/bundle/Vundle.vim" ]; then
         printf "${BLUE}%s${NORMAL}\n" "Installing Vundle..."
         env git clone --depth=1 $VUNDLE_HTTPS "$VIM/bundle/Vundle.vim"
@@ -37,6 +40,12 @@ echo "${NORMAL}"
         fi
         wget 'http://www.vim.org/scripts/download_script.php?src_id=13400' -O $VIM/colors/wombat256mod.vim
     fi
+
+    # if [  -e "$HOME/.vim/colors" ]; then
+    #     if [ ! -e "$HOME/.vim/colors/dracula.vim" ]; then
+    #         cd ~/.vim/colors && curl -o dracula.vim https://raw.githubusercontent.com/dracula/vim/master/colors/dracula.vim
+    #     fi
+    # fi
 
     if [[ $(uname) == 'Darwin' ]]; then
         source "$INSTALLATION_PATH/mac_install.sh"

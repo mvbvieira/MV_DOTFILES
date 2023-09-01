@@ -19,7 +19,8 @@
     syntax enable                               " syntax highlight
 
     set t_Co=256                                " set 256 colors
-    colorscheme wombat256mod                    " set color scheme
+    "colorscheme wombat256mod                    " set color scheme
+    colorscheme ron
 
     set number                                  " show line numbers
     set ruler
@@ -33,6 +34,7 @@
 
     set cursorline                              " shows line under the cursor's line
     set showmatch                               " shows matching part of bracket pairs (), [], {}
+    set hlsearch                                " Use highlighting when doing a search.
 
     set enc=utf-8	                            " utf-8 by default
 
@@ -92,6 +94,14 @@
         "-------------------=== Languages support ===-------------------
         Plugin 'tpope/vim-commentary'                                    " Comment stuff out
         Plugin 'tpope/vim-surround'                                      " Parentheses, brackets, quotes, XML tags, and more
+        Plugin 'sheerun/vim-polyglot'
+        Plugin 'ntpeters/vim-better-whitespace'
+        Plugin 'jiangmiao/auto-pairs'
+        Plugin 'davidhalter/jedi-vim'
+        Plugin 'tpope/vim-fugitive'
+        Plugin 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
+        Plugin 'Rykka/riv.vim'                      " ReStructuredText plugin
+        Plugin 'Valloric/YouCompleteMe'             " Autocomplete plugin
 
         "-------------------=== Other ===-------------------------------
         Plugin 'bling/vim-airline'                                       " Lean & mean status/tabline for vim
@@ -112,6 +122,15 @@
     "-------------------=== TAGBar navigation ===-------------
     " TagBar specific mappings.
     nmap <F8> :TagbarToggle<CR>
+
+    " YouCompleteMe
+    set completeopt-=preview
+
+    let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
+    let g:ycm_confirm_extra_conf=0
+
+    nmap <leader>g :YcmCompleter GoTo<CR>
+    nmap <leader>d :YcmCompleter GoToDefinition<CR>
 
 " }}}
 
