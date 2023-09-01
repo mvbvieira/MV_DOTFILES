@@ -29,6 +29,9 @@ echo "${NORMAL}"
     printf "${BLUE}%s${NORMAL}\n" "Symlinking $TMUX/.tmux.config with ~/.tmux.config..."
     ln -fs $PWD/tmux/.tmux.conf ~/.tmux.conf
 
+    printf "${BLUE}%s${NORMAL}\n" "Symlinking $PWD/tmuxinator/* with ~/.config/tmuxinator/.."
+    ln -fs $PWD/tmuxinator/* ~/.config/tmuxinator/
+
     if [ ! -d "$VIM/bundle/Vundle.vim" ]; then
         printf "${BLUE}%s${NORMAL}\n" "Installing Vundle..."
         env git clone --depth=1 $VUNDLE_HTTPS "$VIM/bundle/Vundle.vim"
