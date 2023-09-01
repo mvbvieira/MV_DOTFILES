@@ -13,6 +13,10 @@ wrapper() {
 
 FONTS=${FONTS:-/tmp/fonts}
 USR_FONTS=${USR_FONTS:-~/.local/share/fonts/}
+PROJECT_PATH="$HOME/MV_DOTFILES"
+INSTALLATION_PATH="$PROJECT_PATH/installation"
+
+source "$INSTALLATION_PATH/default_install.sh"
 
 echo "${NORMAL}"
     if [ ! -n "$VIM" ]; then
@@ -32,6 +36,12 @@ echo "${NORMAL}"
             mkdir -p $VIM/colors
         fi
         wget 'http://www.vim.org/scripts/download_script.php?src_id=13400' -O $VIM/colors/wombat256mod.vim
+    fi
+
+    if [[ $(uname) == 'Darwin' ]]; then
+        source "$INSTALLATION_PATH/mac_install.sh"
+    else
+        source "$INSTALLATION_PATH/linux_install.sh"
     fi
 }
 
