@@ -1,0 +1,11 @@
+# /home/marcos.vieira/.config/tmuxinator/youse-datapipeline.yml
+
+name: youse-datapipeline
+root: ~/Workspace/youse-datapipeline
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - docker-compose run pyspark pyspark --packages io.delta:delta-core_2.12:2.4.0

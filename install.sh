@@ -27,7 +27,7 @@ echo "${NORMAL}"
     ln -fs $PWD/.vimrc ~/.vimrc
 
     printf "${BLUE}%s${NORMAL}\n" "Symlinking $TMUX/.tmux.config with ~/.tmux.config..."
-    ln -fs $PWD/.vimrc ~/.vimrc
+    ln -fs $PWD/tmux/.tmux.conf ~/.tmux.conf
 
     if [ ! -d "$VIM/bundle/Vundle.vim" ]; then
         printf "${BLUE}%s${NORMAL}\n" "Installing Vundle..."
@@ -40,6 +40,9 @@ echo "${NORMAL}"
         fi
         wget 'http://www.vim.org/scripts/download_script.php?src_id=13400' -O $VIM/colors/wombat256mod.vim
     fi
+
+    printf "${BLUE}%s${NORMAL}\n" "Installing Tmuxinator"
+    sudo gem install tmuxinator
 
     # if [  -e "$HOME/.vim/colors" ]; then
     #     if [ ! -e "$HOME/.vim/colors/dracula.vim" ]; then
