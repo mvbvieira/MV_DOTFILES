@@ -84,6 +84,7 @@
 
         "-------------------=== Code/Project navigation ===-------------
         Plugin 'preservim/nerdtree'                                      " Project and file navigation
+        Plugin 'Xuyuanp/nerdtree-git-plugin'
         " Plugin 'kien/ctrlp.vim'                                          " Fast transitions on project files
         Plugin 'majutsushi/tagbar'                                       " Class/module browser
         Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -110,6 +111,7 @@
         "-------------------=== Other ===-------------------------------
         Plugin 'bling/vim-airline'                                       " Lean & mean status/tabline for vim
         Plugin 'rking/ag.vim'
+        Plugin 'airblade/vim-gitgutter'
 
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -168,6 +170,20 @@
     nnoremap <C-F>o :CtrlSFOpen<CR>
     nnoremap <C-F>t :CtrlSFToggle<CR>
     inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+    let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ "Modified"  : "✹",
+                \ "Staged"    : "✚",
+                \ "Untracked" : "✭",
+                \ "Renamed"   : "➜",
+                \ "Unmerged"  : "═",
+                \ "Deleted"   : "✖",
+                \ "Dirty"     : "✗",
+                \ "Clean"     : "✔︎",
+                \ 'Ignored'   : '☒',
+                \ "Unknown"   : "?"
+                \ }
+
 " }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
