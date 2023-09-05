@@ -84,8 +84,11 @@
 
         "-------------------=== Code/Project navigation ===-------------
         Plugin 'preservim/nerdtree'                                      " Project and file navigation
-        Plugin 'kien/ctrlp.vim'                                          " Fast transitions on project files
+        " Plugin 'kien/ctrlp.vim'                                          " Fast transitions on project files
         Plugin 'majutsushi/tagbar'                                       " Class/module browser
+        Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plugin 'junegunn/fzf.vim'
+        Plugin 'dyng/ctrlsf.vim'
 
         "-------------------=== Python  ===-----------------------------
         Plugin 'klen/python-mode'                                        " Python mode (docs, refactor, lints...)
@@ -96,6 +99,7 @@
         Plugin 'tpope/vim-surround'                                      " Parentheses, brackets, quotes, XML tags, and more
         Plugin 'sheerun/vim-polyglot'
         Plugin 'ntpeters/vim-better-whitespace'
+        Plugin 'bronson/vim-trailing-whitespace'
         Plugin 'jiangmiao/auto-pairs'
         Plugin 'davidhalter/jedi-vim'
         Plugin 'tpope/vim-fugitive'
@@ -105,6 +109,7 @@
 
         "-------------------=== Other ===-------------------------------
         Plugin 'bling/vim-airline'                                       " Lean & mean status/tabline for vim
+        Plugin 'rking/ag.vim'
 
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -132,6 +137,37 @@
     nmap <leader>g :YcmCompleter GoTo<CR>
     nmap <leader>d :YcmCompleter GoToDefinition<CR>
 
+    let g:fzf_buffers_jump = 1
+
+    if executable('fzf')
+        " FZF {{{
+        " <C-p> or <C-t> to search files
+        nnoremap <silent> <C-t> :FZF -m<cr>
+        nnoremap <silent> <C-p> :FZF<cr>
+        " <M-p> for open buffers
+        nnoremap <silent> <c-b> :Buffers<cr>
+        " <M-S-p> for MRU
+        nnoremap <c-d><c-h> :History<cr>
+        " Use fuzzy completion relative filepaths across directory
+        imap <expr> <c-x><c-f> fzf#vim#complete#path('git ls-files $(git rev-parse --show-toplevel)')
+        command! -bang -nargs=* Ag
+                    \ call fzf#vim#ag(<q-args>,
+                    \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+                    \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+                    \                 <bang>0)
+    end
+
+    " clean all white spaces in the end-lines
+    autocmd BufWritePre * :FixWhitespace
+
+    nmap     <C-F>f <Plug>CtrlSFPrompt
+    vmap     <C-F>f <Plug>CtrlSFVwordPath
+    vmap     <C-F>F <Plug>CtrlSFVwordExec
+    nmap     <C-F>n <Plug>CtrlSFCwordPath
+    nmap     <C-F>p <Plug>CtrlSFPwordPath
+    nnoremap <C-F>o :CtrlSFOpen<CR>
+    nnoremap <C-F>t :CtrlSFToggle<CR>
+    inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 " }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
@@ -178,10 +214,38 @@
 
     " To turn off highlight until next search
     " map <esc> :noh <CR>
+    nnoremap <space> :noh<cr>
+
+    nnoremap \ :Ag<SPACE>
+
+    " return relative path
+    nmap <Leader>cs :let @*=expand("%")<CR>
+    nmap <Leader>cl :let @*=expand("%:p")<CR>
+    nmap <Leader>cp :let @+ = expand("%:t")<CR>
+    nmap <Leader>cr :let @*=('bundle exec rspec ' . expand("%") . ':' . line("."))<CR>
+    nmap <Leader>cg :call GithubCopyLineUrl()<CR>
+    vnoremap <Leader>cg :call GithubCopyLineUrl()<CR>
 
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
+
+    function! GithubCopyLineUrl()
+        let line1 = a:firstline
+        let line2 = a:lastline
+        let commit = substitute(system('git rev-parse HEAD'), '[\]\|[[:cntrl:]]', '', 'g')
+        let cmd = 'git ls-remote --get-url | sed "s/:/\//g" | sed "s/git@/https:\/\//g" | sed "s/\.git/\/blob\//g"'
+        let result = substitute(system(cmd), '[\]\|[[:cntrl:]]', '', 'g')
+
+        if line1 != line2
+            let lines = '#L' . line1 . '-L' . line2
+        else
+            let lines = '#L' . line1
+        endif
+
+        let @*=(result . commit . '/' . expand("%") . lines)
+    endfunction
+
 " }}}
 
 " STATUS LINE ------------------------------------------------------------ {{{
