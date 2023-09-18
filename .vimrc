@@ -1,11 +1,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                         "
-"              ███╗   ███╗ ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗        "
-"              ████╗ ████║ ██║   ██║██║████╗ ████║██╔══██╗██╔════╝        "
-"              ██╔████╔██║ ██║   ██║██║██╔████╔██║██████╔╝██║             "
-"              ██║╚██╔╝██║ ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║             "
-"              ██║ ╚═╝ ██║  ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗        "
-"              ╚═╝     ╚═╝   ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝        "
+"              ███╗   ███╗██╗   ██╗██╗███╗   ███╗██████╗  ██████╗        "
+"              ████╗ ████║██║   ██║██║████╗ ████║██╔══██╗██╔════╝        "
+"              ██╔████╔██║██║   ██║██║██╔████╔██║██████╔╝██║             "
+"              ██║╚██╔╝██║╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║             "
+"              ██║ ╚═╝ ██║ ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗        "
+"              ╚═╝     ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝        "
 "                                                                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -20,7 +20,8 @@
 
     set t_Co=256                                " set 256 colors
     "colorscheme wombat256mod                    " set color scheme
-    colorscheme ron
+    " colorscheme ron
+    colorscheme torte
 
     set number                                  " show line numbers
     set ruler
@@ -90,6 +91,7 @@
         Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plugin 'junegunn/fzf.vim'
         Plugin 'dyng/ctrlsf.vim'
+        Plugin 'terryma/vim-multiple-cursors'
 
         "-------------------=== Python  ===-----------------------------
         Plugin 'klen/python-mode'                                        " Python mode (docs, refactor, lints...)
@@ -125,6 +127,7 @@
     "-------------------=== NERDTree navigation ===-------------
     " NERDTree specific mappings.
     nnoremap <c-\> :NERDTreeToggle<cr>
+    nmap <leader>m :NERDTreeFind<cr>
 
     "-------------------=== TAGBar navigation ===-------------
     " TagBar specific mappings.
@@ -193,6 +196,7 @@
 
     " Enable mouse use in all modes
     set mouse=a
+    set splitright
 
     " Split the windows using ,v and ,s
     nnoremap <silent> <leader>h :split<CR>
@@ -212,8 +216,6 @@
     noremap <c-left> <c-w>>
     noremap <c-right> <c-w><
 
-    nnoremap <C-j> :tabprevious<CR>
-    nnoremap <C-k> :tabnext<CR>
     nnoremap tn :tabnew<CR>
     nnoremap tc :tabclose<CR>
 

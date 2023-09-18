@@ -58,6 +58,13 @@ echo "${NORMAL}"
     else
         source "$INSTALLATION_PATH/linux_install.sh"
     fi
+
+    echo "If root priviledge is asked, please give."
+    if [ -z $(which yum) ];then
+        sudo apt-get -y install git python vim exuberant-ctags
+    else
+        sudo yum -y install git python vim ctags xclip
+    fi
 }
 
 wrapper
