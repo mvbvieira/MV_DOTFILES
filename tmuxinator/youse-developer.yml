@@ -1,0 +1,29 @@
+# /home/marcos.vieira/.config/tmuxinator/youse-developer.yml
+
+name: youse-developer
+windows:
+  - MV_DOTFILES:
+      layout: main-vertical
+      root: ~/MV_DOTFILES
+      panes:
+        - vim
+  - AIRFLOW_DAGS:
+      layout: main-vertical
+      root: ~/Workspace/airflow-dags
+      panes:
+        - vim
+  - PIPE_PY:
+      layout: main-vertical
+      root: ~/Workspace/youse-datapipeline
+      panes:
+        - vim
+  - PIPE_SCALA:
+      layout: main-vertical
+      root: ~/Workspace/data-pipeline
+      panes:
+        - vim
+  - DEVELOPMENT:
+      layout: main-vertical
+      root: ~/Workspace/Development
+      panes:
+        - vim

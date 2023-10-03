@@ -127,7 +127,7 @@
     "-------------------=== NERDTree navigation ===-------------
     " NERDTree specific mappings.
     nnoremap <c-\> :NERDTreeToggle<cr>
-    nmap <leader>m :NERDTreeFind<cr>
+    nnoremap <leader>m :NERDTreeFind<cr>
 
     "-------------------=== TAGBar navigation ===-------------
     " TagBar specific mappings.
@@ -244,6 +244,8 @@
     nmap <Leader>cg :call GithubCopyLineUrl()<CR>
     vnoremap <Leader>cg :call GithubCopyLineUrl()<CR>
 
+    nnoremap <C-W>M <C-W>\| <C-W>_
+    nnoremap <C-W>m <C-W>=
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
