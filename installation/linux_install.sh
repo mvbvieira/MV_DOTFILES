@@ -5,7 +5,7 @@ function linux_install() {
     echo -ne "\t+ Upgrading System...\n"
     sudo apt-get update -y >> /dev/null && sudo apt-get upgrade -y >> /dev/null
     packager="apt-get"
-    packs="exuberant-ctags silversearcher-ag ncurses-term libjson-xs-perl vim-gtk vim" 
+    packs="exuberant-ctags silversearcher-ag ncurses-term libjson-xs-perl vim-gtk vim"
   else
     echo "ERR: Package Manager not indentified. Please install manually."
     exit 1
@@ -15,6 +15,10 @@ function linux_install() {
   for pack in $packs; do
     sudo $packager install $pack -y >> /dev/null
   done
+
+  echo "Installing FZF"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
 
 #   echo -ne "Install VSCode [S]/n?: "
 #   read answer
@@ -36,7 +40,7 @@ function linux_install() {
 #     # Installind Vundle
 #     echo -ne "\t+ Installing Chrome...\n"
 #     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-#     sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' 
+#     sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 #     sudo apt-get update -y; sudo apt-get install google-chrome-stable -y
 #   fi
 
@@ -89,7 +93,7 @@ function linux_install() {
   #    mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
   #  fi
   # fi
-  
+
   # echo "Installing Plugins..."
   # git submodule update --init
 }

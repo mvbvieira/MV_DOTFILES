@@ -14,6 +14,7 @@
     let $vundle=$vimhome."/bundle/Vundle.vim"
 
     set nocompatible                            " be iMproved, required
+    set nowrap
     filetype off                                " required
 
     syntax enable                               " syntax highlight
